@@ -1,51 +1,52 @@
 import java.io.*;
 import java.util.*;
-import java.text.*;
-import java.math.*;
-import java.util.regex.*;
 
-
-class Difference {
-  	private int[] elements;
-  	public int maximumDifference;
-
-	// Add your code here
-    public Difference(int[] elements) {
-        this.elements = elements;
+class Node {
+	int data;
+	Node next;
+	Node(int d) {
+        data = d;
+        next = null;
     }
-    
-    public int computeDifference() {
-        int minValue = 999999999;
-        int maxValue = 0;
-        for(int i = 0; i < elements.length; i++) {
-            if(elements[i] < minValue) {
-                minValue = elements[i];
-            }
-            if(elements[i] > maxValue) {
-                maxValue = elements[i];
-            }
+}
+
+class Solution {
+
+    public static Node insert(Node head, int data) {
+        Node newNode = new Node(data); 
+        
+        if (head == null) {
+            
+            return newNode;
         }
-        maximumDifference = maxValue - minValue;
-        return maximumDifference;
+        
+        Node current = head;
+        while (current.next != null) {
+            current = current.next;
+        }
+        
+        current.next = newNode;
+        return head;  
     }
 
-} // End of Difference class
+	public static void display(Node head) {
+        Node start = head;
+        while(start != null) {
+            System.out.print(start.data + " ");
+            start = start.next;
+        }
+    }
 
-public class Solution {
-
-    public static void main(String[] args) {
+    public static void main(String args[]) {
         Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int[] a = new int[n];
-        for (int i = 0; i < n; i++) {
-            a[i] = sc.nextInt();
+        Node head = null;
+        int N = sc.nextInt();
+
+        while(N-- > 0) {
+            int ele = sc.nextInt();
+            head = insert(head,ele);
         }
+        display(head);
         sc.close();
-
-        Difference difference = new Difference(a);
-
-        difference.computeDifference();
-
-        System.out.print(difference.maximumDifference);
     }
 }
