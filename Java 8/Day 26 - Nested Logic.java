@@ -1,53 +1,30 @@
-import java.util.*;
 import java.io.*;
-class Node{
-    Node left,right;
-    int data;
-    Node(int data){
-        this.data=data;
-        left=right=null;
-    }
-}
-class Solution{
+import java.util.*;
 
-static void levelOrder(Node root) {
-    if (root == null) return;
-    Queue<Node> queue = new LinkedList<>();
-    queue.add(root);
-    
-    while (!queue.isEmpty()) {
-        Node current = queue.poll();
-        System.out.print(current.data + " ");
-        if (current.left != null) queue.add(current.left);
-        if (current.right != null) queue.add(current.right);
-    }
-}
+public class Solution {
 
-public static Node insert(Node root,int data){
-        if(root==null){
-            return new Node(data);
-        }
-        else{
-            Node cur;
-            if(data<=root.data){
-                cur=insert(root.left,data);
-                root.left=cur;
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int d1 = sc.nextInt();
+        int m1 = sc.nextInt();
+        int y1 = sc.nextInt();
+        int d2 = sc.nextInt();
+        int m2 = sc.nextInt();
+        int y2 = sc.nextInt();
+        sc.close();
+        
+        int fine = 0;
+        
+        if (y1 > y2) {
+            fine = 10000;
+        } else if (y1 == y2) {
+            if (m1 > m2) {
+                fine = 500 * (m1 - m2);
+            } else if (m1 == m2 && d1 > d2) {
+                fine = 15 * (d1 - d2);
             }
-            else{
-                cur=insert(root.right,data);
-                root.right=cur;
-            }
-            return root;
         }
+        
+        System.out.println(fine);
     }
-    public static void main(String args[]){
-            Scanner sc=new Scanner(System.in);
-            int T=sc.nextInt();
-            Node root=null;
-            while(T-->0){
-                int data=sc.nextInt();
-                root=insert(root,data);
-            }
-            levelOrder(root);
-        }	
 }
